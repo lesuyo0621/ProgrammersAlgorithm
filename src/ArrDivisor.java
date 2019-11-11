@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-///////// first try  [ acc : 100 - total 100/100  ]
+///////// first try  [ acc : 100 = total 100/100  ]
 public class ArrDivisor {
 
 	int[] solution(int[] arr, int divisor) {
