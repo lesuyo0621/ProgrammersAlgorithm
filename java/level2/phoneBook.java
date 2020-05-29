@@ -20,4 +20,12 @@ public class phoneBook {
 
         return answer;
     }
+
+    public static void main(String[] args) {
+
+        String[] phone_book = { "12", "123", "1235", "567", "88" };
+
+        phoneBook pb = new phoneBook();
+        System.out.println(pb.solution(phone_book));
+    }
 }
