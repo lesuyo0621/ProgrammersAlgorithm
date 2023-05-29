@@ -1,0 +1,38 @@
+// 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기
+
+SELECT
+    a.CAR_ID,
+    a.CAR_TYPE,
+    FLOOR(a.DAILY_FEE * 30 / 100 * (100 - (SELECT
+                                            b.DISCOUNT_RATE
+                                           FROM
+                                            CAR_RENTAL_COMPANY_DISCOUNT_PLAN b
+                                           WHERE
+                                            b.CAR_TYPE = a.CAR_TYPE
+                                           AND
+                                            DURATION_TYPE = '30일 이상'
+                                          ))) as FEE
+FROM
+    CAR_RENTAL_COMPANY_CAR a
+WHERE
+    a.CAR_TYPE IN ('SUV', '세단')
+AND
+    a.CAR_ID NOT IN (SELECT DISTINCT
+                        CAR_ID
+                     FROM
+                        CAR_RENTAL_COMPANY_RENTAL_HISTORY
+                     WHERE
+                        END_DATE >= '2022-11-01'
+                    )
+AND
+    FLOOR(a.DAILY_FEE * 30 / 100 * (100 - (SELECT
+                                            b.DISCOUNT_RATE
+                                           FROM
+                                            CAR_RENTAL_COMPANY_DISCOUNT_PLAN b
+                                           WHERE
+                                            b.CAR_TYPE = a.CAR_TYPE
+                                           AND
+                                            DURATION_TYPE = '30일 이상'
+                                          ))) BETWEEN 500000 AND 2000000
+ORDER BY
+    FEE DESC, a.CAR_TYPE, a.CAR_ID DESC;
