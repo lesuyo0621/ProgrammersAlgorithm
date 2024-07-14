@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class TakeTwoAndAdd {
+public class TakeTwoAndAddJ {
     private static Integer[] solution(int[] numbers) {
         Set<Integer> set = new TreeSet<>();
         for (int i = 0; i < numbers.length; i++) {
